@@ -8,13 +8,20 @@ const upgrades = [
   // I could add more upgrades as needed - if I add more I can get more buttons and more upgrades
 ];
 export default function App() {
-  const [clicks, setClicks] = useState(0);
-  const [cps, setCps] = useState(1); //clicks per second
+  const [clicks, setClicks] = useState(
+    parseInt(localStorage.getItem("clicks")) || 0
+  );
+  const [cps, setCps] = useState(parseInt(localStorage.getItem("cps")) || 1); //clicks per second
   const [clickStart, startClicks] = useState(false);
   const [startTime, setStartTime] = useState(null);
-  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [timeElapsed, setTimeElapsed] = useState(
+    parseInt(localStorage.getItem("timeElapsed")) || 0
+  );
 
   useEffect(() => {
+    localStorage.setItem("clicks", clicks.toString());
+    localStorage.setItem("cps", cps.toString());
+    localStorage.setItem("timeElapsed", timeElapsed.toString());
     let clickInterval; //had to move this outside the conditional as it wasn't running unless the condition was met
 
     if (clickStart && clicks <= 10000) {
@@ -35,7 +42,7 @@ export default function App() {
         startClicks(false);
       }
     };
-  }, [cps, clickStart, clicks, startTime]); // Added timerId to dependencies
+  }, [cps, clickStart, clicks, startTime, timeElapsed]); // Added timerId to dependencies
 
   // function increaseCps(num) {
   //   setClicks(clicks - num * 10);
