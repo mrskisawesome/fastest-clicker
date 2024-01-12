@@ -59,7 +59,7 @@ export default function App() {
         <p> Target = 10,000 clicks </p>
         <p>Clicks:{clicks}</p>
         <p> Clicks per second: {cps} </p>
-        <p>Elapsed Time: {timeElapsed / 1000} seconds </p>
+        <p>How long did you take?: {timeElapsed / 1000} seconds </p>
 
         <button onClick={handleClick}>
           Click me - how quick can you get to 10,000
